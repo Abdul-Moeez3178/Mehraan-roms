@@ -106,6 +106,104 @@
             }
         }
 
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-wrapper {
+                grid-template-columns: 1fr 400px;
+            }
+        }
+
+        .device-card {
+            background: linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
+            border: 1px solid rgba(255, 107, 26, 0.15);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .device-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-zinc-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .device-name {
+            font-family: var(--font-display);
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .device-codename {
+            color: var(--color-orange);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .device-spec {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .device-spec-icon {
+            color: var(--color-orange);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .device-spec-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--color-zinc-600);
+            font-weight: 600;
+        }
+
+        .device-spec-value {
+            display: block;
+            color: var(--color-text);
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(34, 211, 165, 0.1);
+            color: #22d3a5;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #22d3a5;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -136,16 +234,16 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
 
         .card {
-            background: linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
-            border: 1px solid rgba(255, 107, 26, 0.15);
-            border-radius: 1rem;
-            padding: 1.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 1.25rem;
+            overflow: hidden;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -153,8 +251,61 @@
         }
 
         .card:hover {
-            border-color: rgba(255, 107, 26, 0.4);
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+        }
+
+        .card-cover {
+            width: 100%;
+            height: 200px;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-cover svg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card-cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .card-cover-number {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-cover-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .card-body {
+            background: linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
+            border: 1px solid rgba(255, 107, 26, 0.15);
+            border-top: none;
+            border-radius: 0 0 1rem 1rem;
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
@@ -173,10 +324,11 @@
 
         .card-meta {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             font-size: 0.75rem;
             color: var(--color-zinc-600);
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .badge {
@@ -187,6 +339,18 @@
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.stable {
+            background: rgba(34, 211, 165, 0.15);
+            color: #22d3a5;
+        }
+
+        .badge.rom {
+            background: rgba(255, 107, 26, 0.2);
+            color: var(--color-orange);
         }
 
         .download-btn {
@@ -354,10 +518,52 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="container" style="text-align: center; padding: 4rem 1.25rem;">
-            <h2 style="font-size: 3rem; margin-bottom: 1rem;">Infinix GT 20 Pro</h2>
-            <p style="font-size: 1.125rem; color: var(--color-zinc-400); margin-bottom: 2rem;">Custom ROM Portal — X6871 · Dimensity 8200</p>
-            <p style="color: var(--color-zinc-400); max-width: 600px; margin: 0 auto;">Professional ROM distributions for Infinix GT 20 Pro. Stable, tested builds with full changelog and flashing documentation.</p>
+        <section class="container" style="padding: 4rem 1.25rem; padding-bottom: 2rem;">
+            <div class="hero-wrapper">
+                <div>
+                    <div class="section-label" style="margin-bottom: 1.5rem;">STABLE · 64 BIT · ANDROID 16</div>
+                    <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Custom ROMs for the <span style="color: var(--color-orange);">Infinix GT 20 Pro</span></h2>
+                    <p style="font-size: 1rem; color: var(--color-zinc-400); margin-bottom: 2rem; line-height: 1.8;">Hand-picked, stable ports for <strong style="color: var(--color-text);">X6871</strong>. Ported by <strong style="color: var(--color-orange);">Mehrnn</strong>, hosted cleanly — without the Telegram rabbit-holes.</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="#roms" class="download-btn" style="text-decoration: none; display: inline-block; text-align: center;">Browse ROMs →</a>
+                        <a href="#guide" class="download-btn" style="text-decoration: none; display: inline-block; text-align: center; background: transparent; border: 1px solid rgba(255, 107, 26, 0.3); color: var(--color-text);">Flashing Guide</a>
+                    </div>
+                </div>
+                <div class="device-card">
+                    <div class="device-label">TARGET DEVICE</div>
+                    <div class="device-name">Infinix GT 20 Pro</div>
+                    <div class="device-codename">X6871</div>
+
+                    <div class="device-spec">
+                        <div class="device-spec-icon">📱</div>
+                        <div>
+                            <div class="device-spec-label">Chipset</div>
+                            <span class="device-spec-value">MediaTek Dimensity 8200 Ultimate</span>
+                        </div>
+                    </div>
+
+                    <div class="device-spec">
+                        <div class="device-spec-icon">🏗️</div>
+                        <div>
+                            <div class="device-spec-label">Architecture</div>
+                            <span class="device-spec-value">ARM64 — 64-Bit Only</span>
+                        </div>
+                    </div>
+
+                    <div class="device-spec">
+                        <div class="device-spec-icon">✅</div>
+                        <div>
+                            <div class="device-spec-label">Status</div>
+                            <span class="device-spec-value">Stable ports tested by community</span>
+                        </div>
+                    </div>
+
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        <span>All ports stable as of latest release</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- ROMs Section -->
@@ -560,14 +766,43 @@
         // Render ROMs
         const romGrid = document.getElementById('romGrid');
         const roms = ROMS.filter(r => r.type === 'ROM');
+        
+        function createRomCover(rom) {
+            const svg = `
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad-${rom.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:${rom.accent};stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:${rom.accent}dd;stop-opacity:0.8" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="300" height="200" fill="url(#grad-${rom.id})"/>
+                    <rect width="300" height="200" fill="rgba(0,0,0,0.1)"/>
+                </svg>
+            `;
+            return svg;
+        }
+        
         roms.forEach(rom => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <div class="card-title">${rom.title}</div>
-                <div class="card-subtitle">${rom.subtitle}</div>
-                <div class="badge" style="background: ${rom.accent}20; color: ${rom.accent};">${rom.androidBase}</div>
-                <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+                <div class="card-cover" style="background: ${rom.accent};">
+                    ${createRomCover(rom)}
+                    <div class="card-cover-content">
+                        <div class="card-cover-number">${rom.number || '16'}</div>
+                        <div class="card-cover-text">XOS</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <span class="badge stable">● STABLE</span>
+                        <span class="badge rom">ROM</span>
+                    </div>
+                    <div class="card-title">${rom.title}</div>
+                    <div class="card-subtitle">${rom.subtitle}</div>
+                    <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+                </div>
             `;
             romGrid.appendChild(card);
         });
@@ -579,10 +814,22 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <div class="card-title">${rom.title}</div>
-                <div class="card-subtitle">${rom.subtitle}</div>
-                <div class="badge" style="background: ${rom.accent}20; color: ${rom.accent};">${rom.androidBase}</div>
-                <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+                <div class="card-cover" style="background: ${rom.accent};">
+                    ${createRomCover(rom)}
+                    <div class="card-cover-content">
+                        <div style="font-size: 2.5rem;">🦊</div>
+                        <div class="card-cover-text">ORANGEFOX</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <span class="badge stable">● STABLE</span>
+                        <span class="badge rom">RECOVERY</span>
+                    </div>
+                    <div class="card-title">${rom.title}</div>
+                    <div class="card-subtitle">${rom.subtitle}</div>
+                    <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+                </div>
             `;
             recoveryGrid.appendChild(card);
         });
