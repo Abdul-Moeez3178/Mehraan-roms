@@ -1,0 +1,191 @@
+"@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Font stack === */
+/* Display: Unbounded — geometric, distinctive
+   Body: Manrope — clean modern sans
+   Mono: JetBrains Mono — technical accents */
+
+:root {
+  --font-display: \"Unbounded\", \"Manrope\", system-ui, sans-serif;
+  --font-body: \"Manrope\", system-ui, sans-serif;
+  --font-mono: \"JetBrains Mono\", ui-monospace, \"SF Mono\", monospace;
+}
+
+html,
+body,
+#root {
+  background-color: #0a0a0b;
+  color: #f4f4f5;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      1200px 600px at 85% -10%,
+      rgba(255, 107, 26, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at -10% 110%,
+      rgba(255, 107, 26, 0.1),
+      transparent 60%
+    ),
+    #0a0a0b;
+  min-height: 100vh;
+}
+
+::selection {
+  background: #ff6b1a;
+  color: #0a0a0b;
+}
+
+/* shadcn theme tokens — dark, orange accent */
+@layer base {
+  :root {
+    --background: 240 5% 4%;
+    --foreground: 0 0% 96%;
+    --card: 240 5% 7%;
+    --card-foreground: 0 0% 96%;
+    --popover: 240 5% 7%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 22 100% 55%;
+    --primary-foreground: 240 5% 4%;
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 240 4% 12%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 22 100% 55%;
+    --accent-foreground: 240 5% 4%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 22 100% 55%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* === Custom utility classes === */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .font-mono-x {
+    font-family: var(--font-mono);
+  }
+  .glass {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.015) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .glass-orange {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 26, 0.08) 0%,
+      rgba(255, 107, 26, 0.02) 100%
+    );
+    border: 1px solid rgba(255, 107, 26, 0.18);
+  }
+  .grain::after {
+    content: \"\";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.9'/></svg>\");
+    mix-blend-mode: overlay;
+  }
+  .text-orange {
+    color: #ff6b1a;
+  }
+  .border-orange {
+    border-color: #ff6b1a;
+  }
+  .bg-orange {
+    background-color: #ff6b1a;
+  }
+  .ring-orange {
+    --tw-ring-color: #ff6b1a;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 0 1px rgba(255, 107, 26, 0.45),
+      0 12px 40px -10px rgba(255, 107, 26, 0.35);
+  }
+  .divider-orange {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 107, 26, 0.5) 50%,
+      transparent 100%
+    );
+    height: 1px;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2d;
+  border-radius: 8px;
+  border: 2px solid #0a0a0b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b1a;
+}
+"

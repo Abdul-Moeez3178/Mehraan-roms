@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT20PRO.ports — Custom ROM Site</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0a0b;
+            --color-text: #f4f4f5;
+            --color-orange: #ff6b1a;
+            --color-zinc-400: #a1a1a6;
+            --color-zinc-600: #71717a;
+            --font-display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+            --font-body: 'Manrope', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgba(255,107,26,0.05) 0%, transparent 50%), 
+                        linear-gradient(225deg, rgba(255,107,26,0.03) 0%, transparent 50%),
+                        var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 11, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.5rem;
+            background: var(--color-orange);
+            color: var(--color-bg);
+            font-size: 1.125rem;
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .logo-text p {
+            font-size: 0.625rem;
+            color: var(--color-zinc-600);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        nav {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                display: flex;
+                gap: 1.75rem;
+                font-size: 0.875rem;
+                color: var(--color-zinc-400);
+            }
+
+            nav a {
+                color: inherit;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            nav a:hover {
+                color: var(--color-text);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem;
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            color: var(--color-zinc-400);
+            margin-bottom: 2rem;
+            max-width: 42rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
+            border: 1px solid rgba(255, 107, 26, 0.15);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 107, 26, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-zinc-400);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--color-zinc-600);
+            margin-top: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 107, 26, 0.15);
+            color: var(--color-orange);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .download-btn {
+            background: var(--color-orange);
+            color: var(--color-bg);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: opacity 0.3s;
+            font-family: var(--font-body);
+        }
+
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background: rgba(10, 10, 11, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 1.25rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--color-zinc-400);
+            font-size: 0.875rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            background: rgba(255, 107, 26, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 1rem;
+            padding: 1.25rem;
+        }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--color-zinc-600);
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.875rem;
+            color: var(--color-zinc-400);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #141416;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .modal-subtitle {
+            color: var(--color-zinc-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-orange);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .modal-section ul, .modal-section ol {
+            margin-left: 1.5rem;
+            color: var(--color-zinc-400);
+        }
+
+        .modal-section li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">🔥</div>
+                <div class="logo-text">
+                    <h1>GT20PRO<span style="color: var(--color-orange);">.ports</span></h1>
+                    <p>Custom ROMs · Infinix X6871</p>
+                </div>
+            </a>
+            <nav>
+                <a href="#roms">ROMs</a>
+                <a href="#recovery">Recovery</a>
+                <a href="#guide">Guide</a>
+                <a href="#credits">Credits</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="container" style="text-align: center; padding: 4rem 1.25rem;">
+            <h2 style="font-size: 3rem; margin-bottom: 1rem;">Infinix GT 20 Pro</h2>
+            <p style="font-size: 1.125rem; color: var(--color-zinc-400); margin-bottom: 2rem;">Custom ROM Portal — X6871 · Dimensity 8200</p>
+            <p style="color: var(--color-zinc-400); max-width: 600px; margin: 0 auto;">Professional ROM distributions for Infinix GT 20 Pro. Stable, tested builds with full changelog and flashing documentation.</p>
+        </section>
+
+        <!-- ROMs Section -->
+        <section id="roms" class="container">
+            <div class="section-label">01 — Catalog</div>
+            <h2>Available ROMs</h2>
+            <p class="description">Stable, 64-bit custom firmware for the Infinix GT 20 Pro (X6871). Click a card to view details, changelogs, requirements & flashing instructions.</p>
+            <div class="grid" id="romGrid"></div>
+        </section>
+
+        <!-- Recovery Section -->
+        <section id="recovery" class="container">
+            <div class="section-label">02 — Recovery</div>
+            <h2>Custom Recovery</h2>
+            <p class="description">Flash this first before installing any ROM. Required for the entire flashing workflow.</p>
+            <div class="grid" id="recoveryGrid"></div>
+        </section>
+
+        <!-- Flashing Guide -->
+        <section id="guide" class="container">
+            <div class="section-label">03 — Process</div>
+            <h2>Flashing Guide</h2>
+            <p class="description">Generic 5-step process. ROM-specific differences are listed in each detail panel.</p>
+            <div class="step-grid" id="stepsGrid"></div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-subtitle" id="modalSubtitle"></p>
+            
+            <div class="modal-section">
+                <h4>Base & Specs</h4>
+                <p><strong>Base:</strong> <span id="modalBase"></span></p>
+                <p><strong>Android:</strong> <span id="modalAndroid"></span></p>
+            </div>
+
+            <div class="modal-section" id="changelogSection" style="display:none;">
+                <h4>What's New</h4>
+                <ul id="changelogList"></ul>
+            </div>
+
+            <div class="modal-section" id="knownBugsSection" style="display:none;">
+                <h4>Known Issues</h4>
+                <ul id="bugsList"></ul>
+            </div>
+
+            <div class="modal-section" id="requirementsSection" style="display:none;">
+                <h4>Requirements</h4>
+                <ul id="requirementsList"></ul>
+            </div>
+
+            <div class="modal-section" id="stepsSection" style="display:none;">
+                <h4>Flashing Steps</h4>
+                <ol id="stepsList"></ol>
+            </div>
+
+            <div class="modal-section" id="creditsSection" style="display:none;">
+                <h4>Credits</h4>
+                <ul id="creditsList"></ul>
+            </div>
+
+            <a id="downloadBtn" href="#" class="download-btn" target="_blank" style="display: block; text-align: center; text-decoration: none;">Download</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p><strong>GT20PRO.ports</strong> — Custom ROM Portal</p>
+            <p>ROMs ported by <strong>Mehrnn</strong></p>
+            <p>Website by <strong>Kashan Ahmad</strong></p>
+            <p style="font-size: 0.75rem; margin-top: 2rem; color: var(--color-zinc-600);">Flashing custom ROMs voids warranty. Proceed at your own risk.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data from roms.js
+        const DEVICE = {
+            name: "Infinix GT 20 Pro",
+            codename: "X6871",
+            chipset: "MediaTek Dimensity 8200 Ultimate",
+        };
+
+        const ROMS = [
+            {
+                id: "xos-16-1-v2-n50s",
+                title: "XOS 16.1 v2",
+                subtitle: "Ported from Infinix Note 50s",
+                androidBase: "Android 16",
+                version: "v2 — Stable",
+                type: "ROM",
+                status: "stable",
+                accent: "#FF6B1A",
+                porter: "Mehrnn",
+                base: "Any A15 Vendor",
+                bit: "64-Bit Only",
+                description: "XOS 16.1 v2 for GT 20 Pro — a stable Android 16 based port from the Infinix Note 50s. Do not compare with stock. Can dirty flash from old 50s port.",
+                downloadUrl: "https://drive.google.com/file/d/1JdifWk1U-Tqw83Pb0PbUPvFqJSJLoO5e/view?usp=sharing",
+                fileName: "XOS16.1-v2-X6871-Mehrnn.zip",
+                changelogs: ["Fixed device uncertified", "Stable release v2"],
+                knownBugs: [
+                    { text: "Bypass Charging", fixUrl: "https://t.me/xos16x6871portlinks/23" },
+                ],
+                requirements: [
+                    { text: "Vbmeta Disabler", url: "https://t.me/infinixgt20proid/14628" },
+                    { text: "Working Brain", url: null },
+                ],
+                flashingSteps: [
+                    "Reboot to Recovery (TWRP / OrangeFox)",
+                    "Flash Vbmeta Disabler",
+                    "Flash ROM.zip",
+                    "Format Data",
+                    "Reboot System",
+                ],
+                credits: [
+                    "Allah (S.W.T)",
+                    "@satyam_rai1",
+                    "@ramabondanp",
+                    "Testers and Contributions",
+                ],
+            },
+            {
+                id: "xos-16-2-n60u",
+                title: "XOS 16.2.0",
+                subtitle: "Ported from Infinix Note 60 Ultra",
+                androidBase: "Android 16",
+                version: "v2 — Stable",
+                type: "ROM",
+                status: "stable",
+                accent: "#22D3A5",
+                porter: "Mehrnn",
+                base: "FW 15.1.2.145-165",
+                bit: "64-Bit Only",
+                description: "XOS 16.2.0 for GT 20 Pro — stable Note 60 Ultra port. Polished build with minor bug fixes over previous releases.",
+                downloadUrl: "https://drive.google.com/file/d/1tSSry1rRWioJZi-c9Dg6k1zYBie5qql_/view?usp=drive_link",
+                fileName: "XOS16.2-N60U-X6871-Mehrnn.zip",
+                changelogs: ["Minor bug fixes"],
+                knownBugs: [],
+                requirements: [
+                    { text: "Vbmeta Disabler", url: "https://t.me/infinixgt20proid/14628" },
+                    { text: "Working Brain", url: null },
+                ],
+                flashingSteps: [
+                    "Reboot to Recovery (TWRP / OrangeFox)",
+                    "Flash Vbmeta Disabler",
+                    "Flash ROM.zip",
+                    "Format Data",
+                    "Reboot System",
+                ],
+                credits: [
+                    "Allah (S.W.T)",
+                    "@satyam_rai1",
+                    "@ramabondanp",
+                    "Testers and Contributions",
+                ],
+            },
+            {
+                id: "orangefox-r11-3-x6871",
+                title: "OrangeFox R11.3",
+                subtitle: "Unofficial Recovery (OTG fix)",
+                androidBase: "Recovery",
+                version: "15.1.2 — Unofficial",
+                type: "RECOVERY",
+                status: "stable",
+                accent: "#FF8A3D",
+                porter: "Community",
+                base: "OrangeFox R11.3 Base",
+                bit: "ARM64",
+                description: "OrangeFox Recovery R11.3 for GT 20 Pro with OTG fix. Required for flashing ROMs, Vbmeta Disabler and other zips on the X6871.",
+                downloadUrl: "https://drive.google.com/file/d/1JdifWk1U-Tqw83Pb0PbUPvFqJSJLoO5e/view?usp=sharing",
+                fileName: "OrangeFox-R11.3_OTGfix_15.1.2-Unofficial-X6871.img",
+                changelogs: ["OTG fix", "Built for X6871 (GT 20 Pro)"],
+                knownBugs: [],
+                requirements: [
+                    { text: "Unlocked Bootloader", url: null },
+                    { text: "fastboot / adb on PC", url: null },
+                ],
+                flashingSteps: [
+                    "Reboot phone into fastboot mode",
+                    "Run: fastboot flash recovery OrangeFox-R11.3_OTGfix_15.1.2-Unofficial-X6871.img",
+                    "Reboot to recovery immediately (do not boot system first)",
+                    "Wipe Dalvik / Cache if needed",
+                    "Proceed with ROM / Vbmeta flashing",
+                ],
+                credits: ["OrangeFox Team", "@satyam_rai1", "Community testers"],
+            },
+        ];
+
+        const STEPS = [
+            { title: "Reboot to Recovery", desc: "Boot into TWRP or OrangeFox recovery using volume keys + power." },
+            { title: "Flash Vbmeta Disabler", desc: "Required before flashing any custom ROM on X6871." },
+            { title: "Flash ROM.zip", desc: "Select the downloaded XOS ROM zip and confirm flash." },
+            { title: "Format Data", desc: "Mandatory clean install — wipes /data partition." },
+            { title: "Reboot System", desc: "First boot may take 5–10 minutes. Be patient." },
+        ];
+
+        // Render ROMs
+        const romGrid = document.getElementById('romGrid');
+        const roms = ROMS.filter(r => r.type === 'ROM');
+        roms.forEach(rom => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-title">${rom.title}</div>
+                <div class="card-subtitle">${rom.subtitle}</div>
+                <div class="badge" style="background: ${rom.accent}20; color: ${rom.accent};">${rom.androidBase}</div>
+                <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+            `;
+            romGrid.appendChild(card);
+        });
+
+        // Render Recovery
+        const recoveryGrid = document.getElementById('recoveryGrid');
+        const recovery = ROMS.filter(r => r.type === 'RECOVERY');
+        recovery.forEach(rom => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-title">${rom.title}</div>
+                <div class="card-subtitle">${rom.subtitle}</div>
+                <div class="badge" style="background: ${rom.accent}20; color: ${rom.accent};">${rom.androidBase}</div>
+                <button onclick='openModal(${JSON.stringify(rom).replace(/'/g, "&apos;")})' class="download-btn">View Details</button>
+            `;
+            recoveryGrid.appendChild(card);
+        });
+
+        // Render Steps
+        const stepsGrid = document.getElementById('stepsGrid');
+        STEPS.forEach((step, i) => {
+            const card = document.createElement('div');
+            card.className = 'step-card';
+            card.innerHTML = `
+                <div class="step-number">${String(i + 1).padStart(2, '0')}</div>
+                <div class="step-title">${step.title}</div>
+                <div class="step-desc">${step.desc}</div>
+            `;
+            stepsGrid.appendChild(card);
+        });
+
+        // Modal Functions
+        function openModal(rom) {
+            const modal = document.getElementById('modal');
+            document.getElementById('modalTitle').textContent = rom.title;
+            document.getElementById('modalSubtitle').textContent = rom.description;
+            document.getElementById('modalBase').textContent = rom.base;
+            document.getElementById('modalAndroid').textContent = rom.androidBase;
+
+            // Changelogs
+            const changelogSection = document.getElementById('changelogSection');
+            if (rom.changelogs && rom.changelogs.length > 0) {
+                changelogSection.style.display = 'block';
+                const changelogList = document.getElementById('changelogList');
+                changelogList.innerHTML = '';
+                rom.changelogs.forEach(log => {
+                    const li = document.createElement('li');
+                    li.textContent = log;
+                    changelogList.appendChild(li);
+                });
+            } else {
+                changelogSection.style.display = 'none';
+            }
+
+            // Known Bugs
+            const bugsSection = document.getElementById('knownBugsSection');
+            if (rom.knownBugs && rom.knownBugs.length > 0) {
+                bugsSection.style.display = 'block';
+                const bugsList = document.getElementById('bugsList');
+                bugsList.innerHTML = '';
+                rom.knownBugs.forEach(bug => {
+                    const li = document.createElement('li');
+                    li.innerHTML = bug.fixUrl ? `<a href="${bug.fixUrl}" target="_blank">${bug.text}</a>` : bug.text;
+                    bugsList.appendChild(li);
+                });
+            } else {
+                bugsSection.style.display = 'none';
+            }
+
+            // Requirements
+            const reqSection = document.getElementById('requirementsSection');
+            if (rom.requirements && rom.requirements.length > 0) {
+                reqSection.style.display = 'block';
+                const reqList = document.getElementById('requirementsList');
+                reqList.innerHTML = '';
+                rom.requirements.forEach(req => {
+                    const li = document.createElement('li');
+                    li.innerHTML = req.url ? `<a href="${req.url}" target="_blank">${req.text}</a>` : req.text;
+                    reqList.appendChild(li);
+                });
+            } else {
+                reqSection.style.display = 'none';
+            }
+
+            // Steps
+            const stepsSection = document.getElementById('stepsSection');
+            if (rom.flashingSteps && rom.flashingSteps.length > 0) {
+                stepsSection.style.display = 'block';
+                const stepsList = document.getElementById('stepsList');
+                stepsList.innerHTML = '';
+                rom.flashingSteps.forEach(step => {
+                    const li = document.createElement('li');
+                    li.textContent = step;
+                    stepsList.appendChild(li);
+                });
+            } else {
+                stepsSection.style.display = 'none';
+            }
+
+            // Credits
+            const creditsSection = document.getElementById('creditsSection');
+            if (rom.credits && rom.credits.length > 0) {
+                creditsSection.style.display = 'block';
+                const creditsList = document.getElementById('creditsList');
+                creditsList.innerHTML = '';
+                rom.credits.forEach(credit => {
+                    const li = document.createElement('li');
+                    li.textContent = credit;
+                    creditsList.appendChild(li);
+                });
+            } else {
+                creditsSection.style.display = 'none';
+            }
+
+            // Download Button
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.href = rom.downloadUrl;
+            downloadBtn.textContent = `Download ${rom.fileName}`;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
